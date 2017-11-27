@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models
+
+# Create your models here.
+
+class Pago(models.Model):
+    fecha = models.DateTimeField(auto_now_add=True)
+    merchant_id = models.IntegerField()
+    state_pol = models.CharField("Estado de la transacción.", max_length=32)
+    response_code_pol = models.CharField("Codigo de respuesta de PayU.", max_length=255)
+    response_message_pol = models.CharField("Mensaje de respuesta de PAYU.", max_length=255)
+    reference_sale = models.CharField("Referencia de la venta.", max_length=255)
+    reference_pol = models.CharField("Referencia o número de la transacción generado en PayU.", max_length=255)
+    sign = models.CharField("Firma digital creada para cada uno de las transacciones.", max_length=255)
+    extra1 = models.CharField("Campo adicional para enviar información sobre la compra", max_length=255, blank=True, null=True)
+    extra2 = models.CharField("Campo adicional para enviar información sobre la compra", max_length=255, blank=True, null=True)
+    extra3 = models.CharField("Campo adicional para enviar información sobre la compra", max_length=255, blank=True, null=True)
+    payment_method = models.IntegerField("Identificador interno del medio de pago utilizado.", blank=True, null=True)
+    payment_method_type = models.IntegerField("Tipo de medio de pago utilizado para el pago", blank=True, null=True)
+    installments_number = models.IntegerField("Número de cuotas en las cuales se difirió el pago con tarjeta crédito.", blank=True, null=True)
+    value = models.CharField("Monto total de la transacción", max_length=50)
+    tax = models.IntegerField(blank=True, null=True)
+    additional_value = models.DecimalField(max_digits=19, decimal_places=2, blank=True, null=True)
+    transaction_date = models.CharField("Fecha en que se realizó la transacción.", max_length=50, blank=True, null=True)
+    currency = models.CharField(max_length=3)
+    email_buyer = models.CharField(max_length=255)
+    cus = models.CharField("Código único de seguimiento", max_length=64, blank=True, null=True)
+    pse_bank = models.CharField("Nombre del banco, aplica solo para pagos con PSE.", max_length=255, blank=True, null=True)
+    test = models.IntegerField(blank=True, null=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
+    billing_address = models.CharField("La dirección de facturación", max_length=255, blank=True, null=True)
+    shipping_address = models.CharField("La dirección de entrega de la mercancía.", max_length=55, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    office_phone = models.CharField(max_length=20, blank=True, null=True)
+    account_number_ach = models.CharField("Identificador de la transacción.", max_length=36, blank=True, null=True)
+    account_type_ach = models.CharField("Identificador de la transacción.", max_length=36, blank=True, null=True)
+    administrative_fee  = models.DecimalField("Valor de la tarifa administrativa", max_digits=19, decimal_places=2)
+    administrative_fee_base = models.DecimalField("Valor base de la tarifa administrativa", max_digits=19, decimal_places=2, blank=True, null=True)
+    administrative_fee_tax = models.DecimalField("Valor del impuesto de la tarifa administrativa", max_digits=19, decimal_places=2, blank=True, null=True)
+    airline_code = models.CharField("Código de la aerolínea", max_length=4, blank=True, null=True)
+    attempts = models.IntegerField("Numero de intentos del envío de la confirmación.", blank=True, null=True)
+    authorization_code = models.CharField("Código de autorización de la venta", max_length=12, blank=True, null=True)
+    bank_id = models.CharField("Identificador del banco", max_length=255, blank=True, null=True)
+    billing_city = models.CharField("La ciudad de facturación.", max_length=255, blank=True, null=True)
+    billing_country = models.CharField("El código ISO del país asociado a la dirección de facturación.", max_length=2, blank=True, null=True)
+    commision_pol =  models.DecimalField("Valor de la comisión", max_digits=19, decimal_places=2, blank=True, null=True)
+    commision_pol_currency = models.CharField("Moneda de la comisión", max_length=3, blank=True, null=True)
+    customer_number = models.IntegerField("Numero de cliente.", blank=True, null=True)
+    date = models.CharField("Fecha de la operación.", max_length=255, blank=True, null=True)
+    error_code_bank = models.CharField("Código de error del banco.", max_length=255, blank=True, null=True)
+    error_message_bank = models.CharField("Mensaje de error del banco", max_length=255, blank=True, null=True)
+    exchange_rate = models.DecimalField("Valor de la tasa de cambio.",  max_digits=19, decimal_places=2, blank=True, null=True)
+    ip = models.CharField("Dirección ip desde donde se realizó la transacción.", max_length=39)
+    nickname_buyer = models.CharField("Nombre corto del comprador.", max_length=150, blank=True, null=True)
+    nickname_seller = models.CharField("Nombre corto del vendedor.", max_length=150, blank=True, null=True)
+    payment_method_id = models.IntegerField("Identificador del medio de pago.", blank=True, null=True)
+    payment_request_state = models.CharField("Estado de la solicitud de pago.", max_length=30, blank=True, null=True)
+    pseReference1 = models.CharField("Referencia no. 1 para pagos con PSE.", max_length=255, blank=True, null=True)
+    pseReference2 = models.CharField("Referencia no. 2 para pagos con PSE.", max_length=255, blank=True, null=True)
+    pseReference3 = models.CharField("Referencia no. 3 para pagos con PSE.", max_length=255, blank=True, null=True)
+    response_message_pol = models.CharField("El mensaje de respuesta de PAYU.", max_length=255)
+    shipping_city = models.CharField("La ciudad de entrega de la mercancía.", max_length=255, blank=True, null=True)
+    shipping_country = models.CharField("El código ISO asociado al país de entrega de la mercancía.", max_length=2, blank=True, null=True)
+    transaction_bank_id = models.CharField("Identificador de la transacción en el sistema del banco.", max_length=255, blank=True, null=True)
+    transaction_id = models.CharField("Identificador de la transacción.", max_length=255, blank=True, null=True)
+    payment_method_name = models.CharField("Medio de pago con el cual se hizo el pago.", max_length=255, blank=True, null=True)
+    validacion = models.BooleanField()
+
+    class Meta:
+        verbose_name = "Confirmación de pago"
+        verbose_name_plural = "Confirmaciones de pagos"
+    # end class
+# end class
